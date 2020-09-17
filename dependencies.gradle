@@ -16,6 +16,8 @@ project.ext {
 
     leakcanary_version = '2.4'
 
+    constraintlayout_version = '2.0.0'
+
     appDependencies = [
             testImplementation: [
                     "junit:junit:$junit_version"
@@ -33,7 +35,9 @@ project.ext {
                     "com.google.dagger:dagger:$dagger_version",
                     "com.google.dagger:dagger-android-support:$dagger_version",
                     "io.reactivex.rxjava2:rxjava:$rxjava_version",
-                    "com.jakewharton.rxbinding4:rxbinding:$rxbinding_version"
+                    "com.jakewharton.rxbinding4:rxbinding:$rxbinding_version",
+
+                    "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
             ],
             debugImplementation: [
                     "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
