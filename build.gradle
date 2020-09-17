@@ -1,0 +1,37 @@
+buildscript {
+    ext.kotlin_version = '1.4.10'
+    repositories {
+        google()
+        jcenter()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+    }
+}
+
+plugins {
+    id 'com.gladed.androidgitversion' version '0.4.13'
+}
+
+apply from: 'dependencies.gradle'
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+    }
+
+    apply plugin: 'com.gladed.androidgitversion'
+    androidGitVersion {
+        hideBranches = ['develop', 'master', 'feature.*']
+        baseCode 1
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.example.kd.priceemitter"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionName androidGitVersion.name()
+        versionCode androidGitVersion.code()
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility rootProject.ext.java_version
+        targetCompatibility rootProject.ext.java_version
+    }
+    kotlinOptions {
+        jvmTarget = rootProject.ext.java_version
+    }
+}
+
+dependencies {
+    testImplementation appDependencies.testImplementation
+    androidTestImplementation appDependencies.androidTestImplementation
+    implementation appDependencies.implementation
+    debugImplementation appDependencies.debugImplementation
+    kapt appDependencies.kapt
+    compileOnly appDependencies.compileOnly
+    api appDependencies.api
+}
