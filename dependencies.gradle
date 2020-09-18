@@ -12,6 +12,7 @@ project.ext {
 
     dagger_version = '2.29.1'
     rxjava_version = '2.2.19'
+    rxandroid_version = '2.1.1'
     rxbinding_version = '4.0.0'
 
     leakcanary_version = '2.4'
@@ -35,6 +36,7 @@ project.ext {
                     "com.google.dagger:dagger:$dagger_version",
                     "com.google.dagger:dagger-android-support:$dagger_version",
                     "io.reactivex.rxjava2:rxjava:$rxjava_version",
+                    "io.reactivex.rxjava2:rxandroid:$rxandroid_version",
                     "com.jakewharton.rxbinding4:rxbinding:$rxbinding_version",
 
                     "androidx.constraintlayout:constraintlayout:$constraintlayout_version"

@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import com.example.kd.priceemitter.R
 import com.example.kd.priceemitter.base.BasePresenterActivity
 import com.example.kd.priceemitter.base.PresenterFactory
+import com.example.kd.priceemitter.domain.entity.Price
 import com.example.kd.priceemitter.presenter.PriceEmitterPresenter
 import com.example.kd.priceemitter.presenter.PriceEmitterView
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 import javax.inject.Provider
+import kotlinx.android.synthetic.main.activity_main.*
 
 class PriceEmitterActivity :
     BasePresenterActivity<PriceEmitterPresenter, PriceEmitterView>(),
@@ -18,6 +20,16 @@ class PriceEmitterActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        market_switch.setOnClickListener {
+            presenter.switchMarket()
+        }
+    }
+
+    override fun updatePrice(price: Price) {
+        price_value.text = price.value.toString()
+        direction.text = price.direction.toString()
+        market_name.text = price.marketName
     }
 
     @Inject
