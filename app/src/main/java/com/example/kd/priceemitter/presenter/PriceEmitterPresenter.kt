@@ -3,6 +3,7 @@ package com.example.kd.priceemitter.presenter
 import com.example.kd.priceemitter.datasource.PriceRepository
 import com.example.kd.priceemitter.domain.entity.Price
 import timber.log.Timber
+import java.math.BigDecimal
 import javax.inject.Inject
 
 class PriceEmitterPresenter @Inject constructor(
@@ -11,6 +12,7 @@ class PriceEmitterPresenter @Inject constructor(
     private val markets =
         arrayOf(Price.MARKET_NAME_OIL, Price.MARKET_NAME_ZLOTY, Price.MARKET_NAME_GOLD)
     private var marketIndex = 0
+    private var currentPriceValue = BigDecimal.ZERO
 
     override fun onFirstBind() {
         super.onFirstBind()
@@ -36,7 +38,10 @@ class PriceEmitterPresenter @Inject constructor(
                 .subscribeOn(computationScheduler)
                 .observeOn(uiThread)
                 .subscribe({
-                    present { updatePrice(it) }
+                    if (currentPriceValue != it.value) {
+                        currentPriceValue = it.value
+                        present { updatePrice(it) }
+                    }
                 }, {
                     Timber.e("Failed to update the price: $it")
                 })
