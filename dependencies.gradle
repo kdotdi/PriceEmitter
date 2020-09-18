@@ -19,10 +19,12 @@ project.ext {
 
     constraintlayout_version = '2.0.0'
     timber_version = '4.7.1'
+    mockk_version = '1.10.0'
 
     appDependencies = [
             testImplementation: [
-                    "junit:junit:$junit_version"
+                    "junit:junit:$junit_version",
+                    "io.mockk:mockk:$mockk_version",
             ],
             androidTestImplementation: [
                     "androidx.test.ext:junit:$androidjunit_version",

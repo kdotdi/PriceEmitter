@@ -20,12 +20,6 @@ abstract class BasePresenter<V> : ViewModel() where V : BaseView {
     private val compositeDisposable = CompositeDisposable()
 
     @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-    val computationScheduler = Schedulers.computation()
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-    val uiThread = AndroidSchedulers.mainThread()
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
     open fun onFirstBind() {
 
     }

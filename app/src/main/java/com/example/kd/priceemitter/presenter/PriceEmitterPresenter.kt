@@ -1,18 +1,22 @@
 package com.example.kd.priceemitter.presenter
 
+import androidx.annotation.VisibleForTesting
 import com.example.kd.priceemitter.datasource.PriceRepository
 import com.example.kd.priceemitter.domain.entity.Price
+import com.example.kd.priceemitter.util.SchedulerProvider
 import timber.log.Timber
 import java.math.BigDecimal
 import javax.inject.Inject
 
 class PriceEmitterPresenter @Inject constructor(
-    private val priceRepository: PriceRepository
+    private val priceRepository: PriceRepository,
+    private val schedulerProvider: SchedulerProvider
 ) : CommonUseCasePresenter<PriceEmitterView>() {
     private val markets =
         arrayOf(Price.MARKET_NAME_OIL, Price.MARKET_NAME_ZLOTY, Price.MARKET_NAME_GOLD)
     private var marketIndex = 0
-    private var currentPriceValue = BigDecimal.ZERO
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    var currentPriceValue = BigDecimal.ZERO
 
     override fun onFirstBind() {
         super.onFirstBind()
@@ -31,12 +35,13 @@ class PriceEmitterPresenter @Inject constructor(
         if (marketIndex == markets.size) marketIndex = 0
     }
 
-    private fun getPricesAtMarketIndex() {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun getPricesAtMarketIndex() {
         Timber.i("Subscribing to price repository")
         addSubscription(
             priceRepository.prices(markets[marketIndex])
-                .subscribeOn(computationScheduler)
-                .observeOn(uiThread)
+                .subscribeOn(schedulerProvider.computation())
+                .observeOn(schedulerProvider.ui())
                 .subscribe({
                     if (currentPriceValue != it.value) {
                         currentPriceValue = it.value
