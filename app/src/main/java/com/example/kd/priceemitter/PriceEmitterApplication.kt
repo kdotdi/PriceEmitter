@@ -24,7 +24,7 @@ class PriceEmitterApplication : Application(), HasAndroidInjector {
         if (BuildConfig.DEBUG) {
 
         }
-        
+
         Timber.plant(Timber.DebugTree())
     }
 

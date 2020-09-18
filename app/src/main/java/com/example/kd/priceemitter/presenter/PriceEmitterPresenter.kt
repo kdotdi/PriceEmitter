@@ -30,6 +30,7 @@ class PriceEmitterPresenter @Inject constructor(
     }
 
     private fun getPricesAtMarketIndex() {
+        Timber.i("Subscribing to price repository")
         addSubscription(
             priceRepository.prices(markets[marketIndex])
                 .subscribeOn(computationScheduler)
@@ -43,7 +44,9 @@ class PriceEmitterPresenter @Inject constructor(
     }
 
     fun switchMarket() {
+        Timber.i("Clearing subscriptions")
         clearSubscriptions()
+        Timber.i("Switching market index")
         switchMarketIndex()
         getPricesAtMarketIndex()
     }
