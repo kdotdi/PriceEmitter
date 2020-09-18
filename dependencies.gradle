@@ -18,6 +18,7 @@ project.ext {
     leakcanary_version = '2.4'
 
     constraintlayout_version = '2.0.0'
+    timber_version = '4.7.1'
 
     appDependencies = [
             testImplementation: [
@@ -39,7 +40,8 @@ project.ext {
                     "io.reactivex.rxjava2:rxandroid:$rxandroid_version",
                     "com.jakewharton.rxbinding4:rxbinding:$rxbinding_version",
 
-                    "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+                    "androidx.constraintlayout:constraintlayout:$constraintlayout_version",
+                    "com.jakewharton.timber:timber:$timber_version"
             ],
             debugImplementation: [
                     "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
