@@ -8,6 +8,7 @@ import com.example.kd.priceemitter.base.PresenterFactory
 import com.example.kd.priceemitter.domain.entity.Price
 import com.example.kd.priceemitter.presenter.PriceEmitterPresenter
 import com.example.kd.priceemitter.presenter.PriceEmitterView
+import com.jakewharton.rxbinding4.view.clicks
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 import javax.inject.Provider
@@ -21,7 +22,7 @@ class PriceEmitterActivity :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        market_switch.setOnClickListener {
+        market_switch.clicks().subscribe {
             presenter.switchMarket()
         }
     }
